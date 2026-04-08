@@ -5,7 +5,8 @@
     | "saluto"
     | "stress"
     | "affetto"
-    | "richiamo";
+    | "richiamo"
+    | "fusa";
 
 export type AnalysisResult = {
     topIntent: MeowIntent;
