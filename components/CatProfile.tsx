@@ -1,8 +1,9 @@
-"use client";
+﻿"use client";
 
-import { useEffect, useState } from "react";
-import { CatProfile as CatProfileType } from "@/lib/types";
+import { useEffect, useMemo, useState } from "react";
+import { CatProfile as CatProfileType, MeowIntent } from "@/lib/types";
 import { buildBiasFromDiary, loadProfile, saveProfile } from "@/lib/storage";
+import { getIntentUiLabel } from "@/lib/copy";
 
 const emptyProfile: CatProfileType = {
   name: "",
@@ -19,6 +20,11 @@ export default function CatProfile() {
     if (stored) setProfile(stored);
   }, []);
 
+  const biasEntries = useMemo(
+    () => Object.entries(profile.favoriteIntentBias || {}).sort((a, b) => (Number(b[1]) || 0) - (Number(a[1]) || 0)),
+    [profile.favoriteIntentBias]
+  );
+
   const handleSave = () => {
     const autoBias = buildBiasFromDiary();
     const next = {
@@ -27,23 +33,23 @@ export default function CatProfile() {
     };
     setProfile(next);
     saveProfile(next);
-    alert("Profilo salvato");
   };
 
   return (
     <div className="card">
-      <h2>🧠 Profilo del gatto</h2>
+      <div className="sectionLabel">Il tuo gatto</div>
+      <h2 style={{ marginBottom: 10 }}>Profilo personale</h2>
       <p className="small">
-        La V2 usa questo profilo per personalizzare l’interpretazione.
+        I dati di base aiutano MeowMind a personalizzare la lettura nel tempo.
       </p>
 
       <input
-        placeholder="Nome gatto"
+        placeholder="Nome"
         value={profile.name}
         onChange={(e) => setProfile({ ...profile, name: e.target.value })}
       />
       <input
-        placeholder="Età"
+        placeholder="Eta"
         value={profile.age}
         onChange={(e) => setProfile({ ...profile, age: e.target.value })}
       />
@@ -54,12 +60,26 @@ export default function CatProfile() {
       />
 
       <button className="bigButton" onClick={handleSave}>
-        Salva profilo e bias personale
+        Salva profilo
       </button>
 
-      <div className="note">
-        Bias attuale: {JSON.stringify(profile.favoriteIntentBias || {})}
-      </div>
+      {biasEntries.length === 0 ? (
+        <div className="note">
+          Il profilo si affina dopo le prime analisi salvate. Piu usi MeowMind, piu la lettura puo adattarsi al tuo gatto.
+        </div>
+      ) : (
+        <div className="note">
+          <div style={{ fontWeight: 700, marginBottom: 10 }}>Segnali piu ricorrenti</div>
+          <div className="grid two">
+            {biasEntries.slice(0, 4).map(([intent, value]) => (
+              <div className="stat" key={intent}>
+                <div className="small">{getIntentUiLabel(intent as MeowIntent)}</div>
+                <div style={{ marginTop: 6, fontWeight: 700 }}>{Math.round((Number(value) || 0) * 100)}%</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,83 +1,57 @@
-import { MeowIntent, ReactionMode } from "./types";
+﻿import { MeowIntent } from "./types";
 
 export function getIntentUiLabel(intent: MeowIntent): string {
-    const map: Record<MeowIntent, string> = {
-        fame: "🍗 Fame",
-        attenzione: "🧠 Attenzione",
-        gioco: "🎾 Gioco",
-        saluto: "👋 Saluto",
-        stress: "😾 Stress",
-        affetto: "❤️ Affetto",
-        richiamo: "📍 Richiamo"
-    };
+  const map: Record<MeowIntent, string> = {
+    fame: "Fame",
+    attenzione: "Attenzione",
+    gioco: "Gioco",
+    saluto: "Saluto",
+    stress: "Stress",
+    affetto: "Affetto",
+    richiamo: "Richiamo"
+  };
 
-    return map[intent];
+  return map[intent];
 }
 
 export function getIntentHumanText(intent: MeowIntent): string {
-    const map: Record<MeowIntent, string> = {
-        fame: "Il tuo gatto probabilmente sta chiedendo cibo o anticipando la routine della ciotola.",
-        attenzione: "Il tuo gatto probabilmente vuole attenzione, presenza o una risposta da parte tua.",
-        gioco: "Il tuo gatto sembra voler interazione, movimento o un momento di gioco.",
-        saluto: "Il tuo gatto sembra fare una vocalizzazione breve di contatto o saluto.",
-        stress: "Il suono sembra più teso o scomodo del normale. Potrebbe esserci fastidio o agitazione.",
-        affetto: "Il tono sembra più morbido e compatibile con una comunicazione tranquilla o amichevole.",
-        richiamo: "Il tuo gatto sembra cercare attivamente di farsi seguire, notare o raggiungere."
-    };
+  const map: Record<MeowIntent, string> = {
+    fame: "Il tuo gatto potrebbe stare chiedendo cibo o anticipando la routine della ciotola.",
+    attenzione: "Il tuo gatto potrebbe volere presenza, risposta o un momento di contatto.",
+    gioco: "Il pattern sembra piu vicino a una richiesta di movimento o di interazione.",
+    saluto: "La vocalizzazione sembra breve e compatibile con un segnale di contatto o di rientro.",
+    stress: "Il suono appare piu teso del normale. Potrebbe esserci fastidio o agitazione.",
+    affetto: "Il tono sembra piu morbido e vicino a una comunicazione tranquilla o amichevole.",
+    richiamo: "Il tuo gatto sembra cercare attivamente di farsi seguire, notare o raggiungere."
+  };
 
-    return map[intent];
+  return map[intent];
 }
 
 export function getIntentSocialText(intent: MeowIntent): string {
-    const map: Record<MeowIntent, string> = {
-        fame: "“umano, la ciotola non si riempie da sola”",
-        attenzione: "“guarda me, non quello schermo”",
-        gioco: "“muoviti, adesso si caccia”",
-        saluto: "“ok umano, sei tornato”",
-        stress: "“questa situazione non mi piace per niente”",
-        affetto: "“puoi restare, ma comportati bene”",
-        richiamo: "“seguimi immediatamente”"
-    };
+  const map: Record<MeowIntent, string> = {
+    fame: '"la ciotola non si riempie da sola"',
+    attenzione: '"guarda me, non quello schermo"',
+    gioco: '"muoviti, adesso si gioca"',
+    saluto: '"bene, sei tornato"',
+    stress: '"questa situazione non mi convince"',
+    affetto: '"puoi restare, ma con delicatezza"',
+    richiamo: '"seguimi subito"'
+  };
 
-    return map[intent];
+  return map[intent];
 }
 
 export function getIntentColor(intent: MeowIntent): string {
-    const map: Record<MeowIntent, string> = {
-        fame: "#ffb84d",
-        attenzione: "#7aa2ff",
-        gioco: "#71e39b",
-        saluto: "#a88bff",
-        stress: "#ff6b6b",
-        affetto: "#ff8cc6",
-        richiamo: "#5ee6d8"
-    };
+  const map: Record<MeowIntent, string> = {
+    fame: "#f59e0b",
+    attenzione: "#6366f1",
+    gioco: "#10b981",
+    saluto: "#8b5cf6",
+    stress: "#ef4444",
+    affetto: "#ec4899",
+    richiamo: "#06b6d4"
+  };
 
-    return map[intent];
-}
-
-export function getModeTitle(mode: ReactionMode): string {
-    const map: Record<ReactionMode, string> = {
-        cute: "Cute Mode",
-        meme: "Meme Mode",
-        scientific: "Scientific Mode"
-    };
-    return map[mode];
-}
-
-export function getModeCaption(
-    mode: ReactionMode,
-    label?: string,
-    confidence?: number,
-    socialText?: string
-): string {
-    if (mode === "cute") {
-        return `🐱 MeowMind • ${label || "Live"} ${confidence ? `• ${confidence}%` : ""}\n${socialText || "Il mio gatto è troppo iconico."}`;
-    }
-
-    if (mode === "meme") {
-        return `🐱 MeowMind Meme Drop\n${socialText || "Il mio gatto ha qualcosa da dire."}\n${label || ""} ${confidence ? `(${confidence}%)` : ""}`;
-    }
-
-    return `MeowMind Analysis\nIntent: ${label || "N/A"}\nConfidence: ${confidence || 0}%\n${socialText || ""}`;
+  return map[intent];
 }

@@ -1,9 +1,9 @@
-import "./globals.css";
+﻿import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "MeowMind V2",
-  description: "AI per interpretare e generare vocalizzazioni feline"
+  title: "MeowMind",
+  description: "Capisci il tuo gatto in tempo reale."
 };
 
 export default function RootLayout({

@@ -1,4 +1,4 @@
-import { AnalysisResult, CatProfile, MeowIntent } from "./types";
+﻿import { AnalysisResult, CatProfile, MeowIntent } from "./types";
 
 const intents: MeowIntent[] = [
   "fame",

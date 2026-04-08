@@ -1,4 +1,4 @@
-export async function startMicStream(): Promise<MediaStream> {
+﻿export async function startMicStream(): Promise<MediaStream> {
   return navigator.mediaDevices.getUserMedia({ audio: true });
 }
 
@@ -25,7 +25,9 @@ export async function recordAudio(
 export async function decodeAudioBlob(blob: Blob): Promise<AudioBuffer> {
   const arrayBuffer = await blob.arrayBuffer();
   const audioContext = new AudioContext();
-  return await audioContext.decodeAudioData(arrayBuffer);
+  const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+  await audioContext.close();
+  return audioBuffer;
 }
 
 export function getMonoData(audioBuffer: AudioBuffer): Float32Array {
@@ -53,10 +55,7 @@ export function computeZeroCrossingRate(samples: Float32Array): number {
   return crossings / samples.length;
 }
 
-export function estimatePitch(
-  samples: Float32Array,
-  sampleRate: number
-): number {
+export function estimatePitch(samples: Float32Array, sampleRate: number): number {
   const minFreq = 200;
   const maxFreq = 1800;
 
