@@ -698,7 +698,6 @@ export default function ReactionRecorder() {
                                         {recorderState === "recording" && "registrazione in corso"}
                                         {recorderState === "processing" && "sto processando il file"}
                                         {recorderState === "done" && "video pronto e salvato"}
-                                        {recorderState === "error" && "errore"}
                                     </div>
                                 </div>
                             </div>
