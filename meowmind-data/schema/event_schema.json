@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "required": [
+    "event_id",
+    "session_id",
+    "cat_id",
+    "user_id",
+    "raw_audio_path",
+    "processed_audio_path",
+    "start_offset_ms",
+    "end_offset_ms",
+    "event_type",
+    "quality_score",
+    "has_vocalization"
+  ],
+  "properties": {
+    "event_id": { "type": "string" },
+    "session_id": { "type": "string" },
+    "cat_id": { "type": "string" },
+    "user_id": { "type": "string" },
+    "raw_audio_path": { "type": "string" },
+    "raw_video_path": { "type": [ "string", "null" ] },
+    "processed_audio_path": { "type": "string" },
+    "start_offset_ms": { "type": "integer" },
+    "end_offset_ms": { "type": "integer" },
+    "event_type": {
+      "type": "string",
+      "enum": [ "vocal_event", "purr_event", "mixed_event", "noise_event" ]
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [ "manual_capture", "passive_capture", "imported" ]
+    },
+    "quality_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "has_vocalization": { "type": "boolean" },
+    "has_video": { "type": "boolean" }
+  }
+}

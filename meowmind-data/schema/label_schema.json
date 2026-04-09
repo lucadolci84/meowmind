@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "required": [
+    "label_id",
+    "event_id",
+    "label_source",
+    "label_type",
+    "label_value",
+    "label_confidence"
+  ],
+  "properties": {
+    "label_id": { "type": "string" },
+    "event_id": { "type": "string" },
+    "label_source": {
+      "type": "string",
+      "enum": [ "human", "system", "reviewer" ]
+    },
+    "label_type": {
+      "type": "string",
+      "enum": [
+        "context",
+        "intent",
+        "emotion",
+        "body_state",
+        "position",
+        "audio_class"
+      ]
+    },
+    "label_value": { "type": "string" },
+    "label_confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "annotator_id": { "type": [ "string", "null" ] }
+  }
+}

@@ -21,7 +21,7 @@ export function useToast() {
 
     useEffect(() => {
         if (!visible) return;
-        const id = window.setTimeout(() => setVisible(false), 2600);
+        const id = window.setTimeout(() => setVisible(false), 2200);
         return () => window.clearTimeout(id);
     }, [visible]);
 

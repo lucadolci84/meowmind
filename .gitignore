@@ -31,3 +31,10 @@ Desktop.ini
 
 # misc
 .DS_Store
+
+meowmind-data/raw/audio/*
+meowmind-data/raw/video/*
+meowmind-data/processed/audio_segments/*
+!meowmind-data/raw/audio/.gitkeep
+!meowmind-data/raw/video/.gitkeep
+!meowmind-data/processed/audio_segments/.gitkeep

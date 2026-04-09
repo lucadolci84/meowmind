@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dataset:add-event": "node scripts/add-event.js"
   },
   "dependencies": {
     "next": "^16.2.2",

@@ -1,0 +1,9 @@
+label_id,event_id,label_source,label_type,label_value,label_confidence,annotator_id
+lab_0001,evt_0001,human,context,near_bowl,0.98,usr_0001
+lab_0002,evt_0001,human,intent,food_request,0.86,usr_0001
+lab_0003,evt_0001,human,body_state,tail_up,0.70,usr_0001
+lab_0004,evt_0002,human,context,near_owner,0.93,usr_0001
+lab_0005,evt_0002,human,intent,attention_request,0.78,usr_0001
+lab_0006,evt_0003,human,context,resting_on_lap,0.96,usr_0001
+lab_0007,evt_0003,human,intent,purr,0.97,usr_0001
+lab_0008,evt_0003,human,emotion,calm_affiliative,0.85,usr_0001

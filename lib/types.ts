@@ -17,6 +17,7 @@ export type AnalysisResult = {
         rms: number;
         zcr: number;
         pitchEstimate: number;
+        lowBandRatio: number;
     };
     createdAt: string;
 };
@@ -56,4 +57,65 @@ export type ReactionClip = {
     confidence?: number;
     socialText?: string;
     durationMs?: number;
+};
+
+export type DatasetEventType =
+    | "vocal_event"
+    | "purr_event"
+    | "mixed_event"
+    | "noise_event";
+
+export type DatasetContext =
+    | "near_bowl"
+    | "near_owner"
+    | "near_door"
+    | "play"
+    | "rest"
+    | "carrier"
+    | "unknown";
+
+export type DatasetIntent =
+    | "food_request"
+    | "attention_request"
+    | "greeting"
+    | "play_arousal"
+    | "stress_discomfort"
+    | "affiliative_soft_contact"
+    | "recall_or_follow_me"
+    | "purr"
+    | "unknown_or_mixed";
+
+export type DatasetOutcome =
+    | "food_served"
+    | "cat_approached_owner"
+    | "cat_moved_to_bowl"
+    | "cat_moved_away"
+    | "cat_relaxed"
+    | "cat_kept_vocalizing"
+    | "unknown";
+
+export type DatasetQuality = "high" | "medium" | "low";
+
+export type DatasetEventDraft = {
+    id: string;
+    createdAt: string;
+    catId?: string;
+    sessionId?: string;
+    source: "audio_recorder" | "live_interpreter" | "reaction_recorder";
+    eventType: DatasetEventType;
+    context: DatasetContext;
+    intent: DatasetIntent;
+    outcome: DatasetOutcome;
+    quality: DatasetQuality;
+    aiTopIntent?: string;
+    aiConfidence?: number;
+    notes?: string;
+    audioStorageType?: "local" | "remote";
+    audioMediaId?: string;
+    audioMimeType?: string;
+    audioFileName?: string;
+    audioLocalBlobId?: string;
+    audioRemoteKey?: string;
+    audioRemoteUrl?: string;
+    audioDurationSec?: number;
 };

@@ -1,19 +1,20 @@
 ﻿"use client";
 
 export default function ReactionGallery() {
-  return (
-    <div className="card">
-      <div className="sectionLabel">Le tue clip</div>
-      <h2 style={{ marginBottom: 10 }}>Archivio clip</h2>
-      <p className="small">
-        Qui appariranno le clip salvate quando attiveremo il recorder video completo.
-      </p>
-      <div className="emptyState">
-        <div style={{ fontWeight: 800 }}>Ancora nessuna clip</div>
-        <div className="small" style={{ marginTop: 8 }}>
-          Il prossimo step e collegare il live a registrazione video e card social.
+    return (
+        <div className="card">
+            <div className="sectionLabel">Libreria</div>
+            <h2 style={{ marginBottom: 10 }}>I tuoi momenti</h2>
+            <p className="small">
+                Qui troverai le letture e i contenuti che deciderai di conservare.
+            </p>
+            <div className="emptyState revealCard">
+                <div className="emptyIllustration" />
+                <div style={{ fontWeight: 800 }}>La libreria è ancora vuota</div>
+                <div className="small" style={{ marginTop: 8 }}>
+                    I momenti salvati compariranno qui in modo naturale, senza interrompere il flusso.
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }

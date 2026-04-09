@@ -64,3 +64,28 @@ export function addLiveSnapshot(entry: LiveSnapshot) {
   entries.unshift(entry);
   saveLiveSnapshots(entries.slice(0, 50));
 }
+
+import { DatasetEventDraft } from "./types";
+
+const DATASET_DRAFTS_KEY = "meowmind_dataset_drafts";
+
+export function loadDatasetDrafts(): DatasetEventDraft[] {
+    if (typeof window === "undefined") return [];
+    const raw = localStorage.getItem(DATASET_DRAFTS_KEY);
+    return raw ? JSON.parse(raw) : [];
+}
+
+export function saveDatasetDrafts(entries: DatasetEventDraft[]) {
+    localStorage.setItem(DATASET_DRAFTS_KEY, JSON.stringify(entries));
+}
+
+export function addDatasetDraft(entry: DatasetEventDraft) {
+    const entries = loadDatasetDrafts();
+    entries.unshift(entry);
+    saveDatasetDrafts(entries.slice(0, 200));
+}
+
+export function deleteDatasetDraft(id: string) {
+    const entries = loadDatasetDrafts().filter((item) => item.id !== id);
+    saveDatasetDrafts(entries);
+}

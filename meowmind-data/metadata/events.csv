@@ -1,0 +1,5 @@
+event_id,session_id,cat_id,user_id,raw_audio_path,raw_video_path,processed_audio_path,start_offset_ms,end_offset_ms,event_type,source_type,quality_score,has_vocalization,has_video
+evt_0001,ses_0001,cat_0001,usr_0001,raw/audio/ses_0001.wav,raw/video/ses_0001.mp4,processed/audio_segments/evt_0001.wav,1200,5400,vocal_event,manual_capture,0.91,true,true
+evt_0002,ses_0001,cat_0001,usr_0001,raw/audio/ses_0001.wav,raw/video/ses_0001.mp4,processed/audio_segments/evt_0002.wav,7000,10200,vocal_event,manual_capture,0.88,true,true
+evt_0003,ses_0002,cat_0001,usr_0001,raw/audio/ses_0002.wav,raw/video/ses_0002.mp4,processed/audio_segments/evt_0003.wav,2500,9800,purr_event,manual_capture,0.94,true,true
+evt_0004,ses_0002,cat_0001,usr_0001,raw/audio/ses_0002.wav,raw/video/ses_0002.mp4,processed/audio_segments/evt_0004.wav,2500,5100,vocal_event,manual_capture,0.87,true,true

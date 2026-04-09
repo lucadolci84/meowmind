@@ -1,0 +1,3 @@
+session_id,user_id,cat_id,start_time,end_time,location_type,room_type,device_type,notes
+ses_0001,usr_0001,cat_0001,2026-04-08T18:52:00Z,2026-04-08T18:57:00Z,home,kitchen,iphone_13,"before dinner"
+ses_0002,usr_0001,cat_0001,2026-04-08T22:10:00Z,2026-04-08T22:14:00Z,home,living_room,iphone_13,"lap and couch session"

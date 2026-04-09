@@ -1,0 +1,3 @@
+user_id,household_id,country,language,consent_dataset,consent_research
+usr_0001,house_001,IT,it,true,true
+usr_0002,house_002,IT,it,true,false

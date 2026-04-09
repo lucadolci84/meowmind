@@ -32,10 +32,11 @@ export function classifyMeow(
         rms: number;
         zcr: number;
         pitchEstimate: number;
+        lowBandRatio: number;
     },
     profile?: CatProfile | null
 ): AnalysisResult {
-    const { durationSec, rms, zcr, pitchEstimate } = features;
+    const { durationSec, rms, zcr, pitchEstimate, lowBandRatio } = features;
 
     const scores: Record<MeowIntent, number> = {
         fame: 0.1,
@@ -71,29 +72,61 @@ export function classifyMeow(
     if (zcr < 0.08) scores.affetto += 0.12;
     if (zcr >= 0.08 && zcr <= 0.11) scores.attenzione += 0.16;
 
-    // Regola base per fusa:
-    // suono piu continuo, basso, poco aggressivo, non troppo frammentato
-    if (
-        durationSec > 2.0 &&
-        rms < 0.05 &&
-        zcr < 0.1 &&
-        pitchEstimate > 0 &&
-        pitchEstimate < 350
-    ) {
-        scores.fusa += 0.55;
-        scores.affetto += 0.25;
-        scores.fame = Math.max(0.05, scores.fame - 0.08);
-        scores.richiamo = Math.max(0.05, scores.richiamo - 0.05);
+    // Segnali da fusa: continuita, basse frequenze, energia morbida
+    if (durationSec > 1.4) {
+        scores.fusa += 0.18;
+        scores.affetto += 0.08;
     }
 
-    // Variante fusa / suono molto morbido anche se il pitch e poco affidabile
+    if (durationSec > 2.2) {
+        scores.fusa += 0.16;
+    }
+
+    if (lowBandRatio > 0.35) {
+        scores.fusa += 0.28;
+        scores.affetto += 0.1;
+    }
+
+    if (lowBandRatio > 0.5) {
+        scores.fusa += 0.22;
+    }
+
+    if (rms >= 0.01 && rms <= 0.06) {
+        scores.fusa += 0.18;
+    }
+
+    if (zcr < 0.09) {
+        scores.fusa += 0.12;
+        scores.affetto += 0.08;
+    }
+
+    if (pitchEstimate > 0 && pitchEstimate < 320) {
+        scores.fusa += 0.18;
+    }
+
+    // Regola forte per fusa
+    if (
+        durationSec > 1.6 &&
+        rms >= 0.008 &&
+        rms <= 0.06 &&
+        zcr < 0.1 &&
+        lowBandRatio > 0.28
+    ) {
+        scores.fusa += 0.6;
+        scores.affetto += 0.2;
+        scores.stress = Math.max(0.05, scores.stress - 0.08);
+        scores.richiamo = Math.max(0.05, scores.richiamo - 0.05);
+        scores.fame = Math.max(0.05, scores.fame - 0.05);
+    }
+
+    // Variante ancora piu morbida
     if (
         durationSec > 2.5 &&
-        rms < 0.045 &&
+        lowBandRatio > 0.4 &&
         zcr < 0.09
     ) {
-        scores.fusa += 0.25;
-        scores.affetto += 0.12;
+        scores.fusa += 0.3;
+        scores.affetto += 0.15;
     }
 
     // Contesto orario
@@ -126,7 +159,8 @@ export function classifyMeow(
             durationSec,
             rms,
             zcr,
-            pitchEstimate
+            pitchEstimate,
+            lowBandRatio
         },
         createdAt: new Date().toISOString()
     };

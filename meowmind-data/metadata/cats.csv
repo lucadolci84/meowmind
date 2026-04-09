@@ -1,0 +1,3 @@
+cat_id,name,sex,age_years,breed,neutered,home_country,notes
+cat_0001,Luna,F,3.0,european_shorthair,true,IT,"very vocal before dinner"
+cat_0002,Leo,M,5.0,maine_coon,true,IT,"more visual signals than voice"

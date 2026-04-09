@@ -1,0 +1,5 @@
+outcome_id,event_id,observed_within_sec,outcome_type,outcome_value,confidence
+out_0001,evt_0001,30,food_served,true,0.98
+out_0002,evt_0001,30,cat_moved_to_bowl,true,0.91
+out_0003,evt_0002,20,cat_approached_owner,true,0.84
+out_0004,evt_0003,20,cat_remained_relaxed,true,0.90

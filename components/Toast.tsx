@@ -11,49 +11,55 @@ export default function Toast({
     type = "info",
     onClose
 }: ToastProps) {
-    const bg =
+    const config =
         type === "success"
-            ? "rgba(113, 227, 155, 0.16)"
+            ? {
+                title: "Completato",
+                icon: "✓",
+                shell: "linear-gradient(180deg, rgba(236,253,245,0.94), rgba(220,252,231,0.88))",
+                border: "1px solid rgba(34,197,94,0.16)",
+                iconBg: "rgba(34,197,94,0.12)"
+            }
             : type === "error"
-                ? "rgba(255, 107, 107, 0.16)"
-                : "rgba(110, 124, 255, 0.16)";
-
-    const border =
-        type === "success"
-            ? "rgba(113, 227, 155, 0.45)"
-            : type === "error"
-                ? "rgba(255, 107, 107, 0.45)"
-                : "rgba(110, 124, 255, 0.45)";
+                ? {
+                    title: "Attenzione",
+                    icon: "!",
+                    shell: "linear-gradient(180deg, rgba(254,242,242,0.96), rgba(254,226,226,0.88))",
+                    border: "1px solid rgba(239,68,68,0.16)",
+                    iconBg: "rgba(239,68,68,0.12)"
+                }
+                : {
+                    title: "Aggiornamento",
+                    icon: "i",
+                    shell: "linear-gradient(180deg, rgba(238,242,255,0.96), rgba(224,231,255,0.88))",
+                    border: "1px solid rgba(99,102,241,0.16)",
+                    iconBg: "rgba(99,102,241,0.12)"
+                };
 
     return (
         <div
+            className="toastShell"
             style={{
-                position: "fixed",
-                right: 20,
-                bottom: 20,
-                zIndex: 1200,
-                minWidth: 280,
-                maxWidth: 420,
-                background: bg,
-                border: `1px solid ${border}`,
-                borderRadius: 16,
-                padding: "14px 16px",
-                backdropFilter: "blur(8px)",
-                boxShadow: "0 10px 30px rgba(0,0,0,0.25)"
+                background: config.shell,
+                border: config.border
             }}
         >
-            <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
-                <div style={{ flex: 1 }}>{message}</div>
-                <button
-                    onClick={onClose}
+            <div className="toastInner">
+                <div
+                    className="toastIcon"
                     style={{
-                        border: "none",
-                        background: "transparent",
-                        color: "white",
-                        fontSize: 16,
-                        cursor: "pointer"
+                        background: config.iconBg
                     }}
                 >
+                    {config.icon}
+                </div>
+
+                <div style={{ minWidth: 0 }}>
+                    <div className="toastTitle">{config.title}</div>
+                    <div className="toastMessage">{message}</div>
+                </div>
+
+                <button className="toastClose" onClick={onClose} aria-label="Chiudi notifica">
                     ×
                 </button>
             </div>
